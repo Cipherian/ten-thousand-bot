@@ -192,10 +192,23 @@ class EvilIncarnateBot(BaseBot):
         return roll
 
 
-class YourBot(BaseBot):
+class TheHighGroundBot(BaseBot):
     def _roll_bank_or_quit(self):
         """your logic here"""
-        return "b"
+        if self.dice_remaining == 5:
+            if self.unbanked_points >= 2900:
+                return "b"
+        if self.dice_remaining == 4:
+            if self.unbanked_points >= 1000:
+                return "b"
+        if self.dice_remaining == 3:
+            if self.unbanked_points >= 400:
+                return "b"
+        if self.dice_remaining <= 2:
+            return "b"
+        if self.unbanked_points + self.total_score >= 10000:
+            return "b"
+        return "r"
 
     def _enter_dice(self):
         """simulate user entering which dice to keep.
@@ -210,4 +223,4 @@ if __name__ == "__main__":
     MiddlingMargaret.play(num_games)
     DaringDarla.play(num_games)
     YoniBot.play(num_games)
-    YourBot.play(num_games)
+    TheHighGroundBot.play(num_games)
